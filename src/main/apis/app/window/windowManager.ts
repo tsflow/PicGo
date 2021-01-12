@@ -12,11 +12,13 @@ class WindowManager implements IWindowManager {
   private windowIdMap: Map<number, IWindowList | string> = new Map()
   create (name: IWindowList) {
     const windowConfig: IWindowListItem = windowList.get(name)!
+
     if (windowConfig.isValid) {
       if (!windowConfig.multiple) {
         if (this.has(name)) return this.windowMap.get(name)!
       }
       const window = new BrowserWindow(windowConfig.options())
+      console.log(windowConfig.options())
       const id = window.id
       if (windowConfig.multiple) {
         this.windowMap.set(`${name}_${window.id}`, window)

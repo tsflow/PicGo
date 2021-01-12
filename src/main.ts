@@ -24,6 +24,7 @@ Vue.prototype.$builtInPicBed = [
   'aliyun',
   'github'
 ]
+
 Vue.prototype.$db = db
 Vue.prototype.$http = axios
 Vue.prototype.$bus = bus

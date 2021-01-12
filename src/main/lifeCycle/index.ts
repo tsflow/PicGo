@@ -1,8 +1,4 @@
-import {
-  app,
-  globalShortcut,
-  protocol
-} from 'electron'
+import { app, globalShortcut, protocol } from 'electron'
 import {
   createProtocol,
   installVueDevtools
@@ -31,6 +27,7 @@ import db from '#/datastore'
 import bus from '@core/bus'
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
+
 class LifeCycle {
   private beforeReady () {
     protocol.registerSchemesAsPrivileged([{ scheme: 'picgo', privileges: { secure: true, standard: true } }])
@@ -41,6 +38,7 @@ class LifeCycle {
     busEventList.listen()
     updateShortKeyFromVersion212(db, db.get('settings.shortKey'))
   }
+
   private onReady () {
     app.on('ready', async () => {
       createProtocol('picgo')
@@ -77,6 +75,7 @@ class LifeCycle {
       }
     })
   }
+
   private onRunning () {
     app.on('second-instance', (event, commandLine, workingDirectory) => {
       let files = getUploadFiles(commandLine, workingDirectory)
@@ -117,6 +116,7 @@ class LifeCycle {
       process.env.XDG_CURRENT_DESKTOP = 'Unity'
     }
   }
+
   private onQuit () {
     app.on('window-all-closed', () => {
       if (process.platform !== 'darwin') {
@@ -146,6 +146,7 @@ class LifeCycle {
       }
     }
   }
+
   launchApp () {
     const gotTheLock = app.requestSingleInstanceLock()
     if (!gotTheLock) {
